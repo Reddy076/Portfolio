@@ -1,3 +1,4 @@
+import StarBackground from "../Components/StarBackground";
 import ThemeToggle from "../Components/ThemeToggle";
 
 
@@ -11,6 +12,7 @@ export default function Home() {
       }
       {
         /* Background Effects */
+        <StarBackground/>
 
       }
 
