@@ -1,5 +1,6 @@
 import StarBackground from "../Components/StarBackground";
 import ThemeToggle from "../Components/ThemeToggle";
+import Navbar from "../Components/Navbar";
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
 
       {
         /* Navbar*/
+        <Navbar/>
       }
 
       {
