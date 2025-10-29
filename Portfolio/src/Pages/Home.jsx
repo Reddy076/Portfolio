@@ -1,6 +1,7 @@
 import StarBackground from "../Components/StarBackground";
 import ThemeToggle from "../Components/ThemeToggle";
 import Navbar from "../Components/Navbar";
+import HeroSection from "../Components/HeroSection";
 
 
 export default function Home() {
@@ -25,6 +26,10 @@ export default function Home() {
       {
         /* Main Content */
       }
+
+      <main>
+        <HeroSection/>
+      </main>
 
     </div>
   )
