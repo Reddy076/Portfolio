@@ -2,6 +2,7 @@ import StarBackground from "../Components/StarBackground";
 import ThemeToggle from "../Components/ThemeToggle";
 import Navbar from "../Components/Navbar";
 import HeroSection from "../Components/HeroSection";
+import AboutSection from "../Components/AboutSection";
 
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
 
       <main>
         <HeroSection/>
+        <AboutSection/>
       </main>
 
     </div>
