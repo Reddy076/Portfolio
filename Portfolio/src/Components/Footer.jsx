@@ -6,7 +6,7 @@ export const Footer = () => {
       <div className="container max-w-5xl mx-auto">
         <div className="glass rounded-xl p-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Dasthagiri Reddy. All rights reserved.
+            &copy; {new Date().getFullYear()} <span className="text-foreground">Dasthagiri Reddy</span>. All rights reserved.
           </p>
           <a
             href="#hero"
