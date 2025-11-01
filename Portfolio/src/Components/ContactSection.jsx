@@ -10,67 +10,29 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/Hooks/use-toast";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const formRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
     setIsSubmitting(true);
 
-    // Get form data
-    const formData = new FormData(e.target);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message')
-    };
-
-    try {
-      // Send data to backend
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        toast({
-          title: "Message sent!",
-          description: "Thank you for your message. I'll get back to you soon.",
-        });
-        // Reset the form after successful submission
-        if (formRef.current) {
-          formRef.current.reset();
-        }
-      } else {
-        toast({
-          title: "Error",
-          description: result.error || "Failed to send message. Please try again.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
+    setTimeout(() => {
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
+        title: "Message sent!",
+        description: "Thank you for your message. I'll get back to you soon.",
       });
-    } finally {
       setIsSubmitting(false);
-    }
+    }, 1500);
   };
   
   return (
@@ -162,10 +124,11 @@ export const ContactSection = () => {
 
           <div
             className={`glass p-8 rounded-xl transition-all duration-700 delay-300 ${isVisible ? 'slide-in-right' : ''}`}
+            onSubmit={handleSubmit}
           >
             <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
 
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+            <form className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
