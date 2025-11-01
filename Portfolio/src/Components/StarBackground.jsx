@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 
-// id, size, x, y, opacity, animationDuration
-// id, size, x, y, delay, animationDuration
-
 export const StarBackground = () => {
   const [stars, setStars] = useState([]);
   const [meteors, setMeteors] = useState([]);
@@ -22,7 +19,7 @@ export const StarBackground = () => {
 
   const generateStars = () => {
     const numberOfStars = Math.floor(
-      (window.innerWidth * window.innerHeight) / 10000
+      (window.innerWidth * window.innerHeight) / 8000
     );
 
     const newStars = [];
@@ -33,8 +30,9 @@ export const StarBackground = () => {
         size: Math.random() * 3 + 1,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        opacity: Math.random() * 0.5 + 0.5,
-        animationDuration: Math.random() * 4 + 2,
+        opacity: Math.random() * 0.7 + 0.3,
+        animationDuration: Math.random() * 5 + 3,
+        animationDelay: Math.random() * 5,
       });
     }
 
@@ -42,17 +40,17 @@ export const StarBackground = () => {
   };
 
   const generateMeteors = () => {
-    const numberOfMeteors = 4;
+    const numberOfMeteors = 6;
     const newMeteors = [];
 
     for (let i = 0; i < numberOfMeteors; i++) {
       newMeteors.push({
         id: i,
-        size: Math.random() * 2 + 1,
+        size: Math.random() * 3 + 1,
         x: Math.random() * 100,
-        y: Math.random() * 20,
-        delay: Math.random() * 15,
-        animationDuration: Math.random() * 3 + 3,
+        y: Math.random() * 30,
+        delay: Math.random() * 20,
+        animationDuration: Math.random() * 4 + 4,
       });
     }
 
@@ -64,7 +62,7 @@ export const StarBackground = () => {
       {stars.map((star) => (
         <div
           key={star.id}
-          className="star animate-pulse-subtle"
+          className="absolute rounded-full bg-white animate-pulse-subtle"
           style={{
             width: star.size + "px",
             height: star.size + "px",
@@ -72,6 +70,8 @@ export const StarBackground = () => {
             top: star.y + "%",
             opacity: star.opacity,
             animationDuration: star.animationDuration + "s",
+            animationDelay: star.animationDelay + "s",
+            boxShadow: "0 0 10px 2px rgba(255, 255, 255, 0.4)",
           }}
         />
       ))}
@@ -79,14 +79,16 @@ export const StarBackground = () => {
       {meteors.map((meteor) => (
         <div
           key={meteor.id}
-          className="meteor animate-meteor"
+          className="absolute bg-gradient-to-r from-white via-white to-transparent rounded-full"
           style={{
-            width: meteor.size * 50 + "px",
+            width: meteor.size * 100 + "px",
             height: meteor.size * 2 + "px",
             left: meteor.x + "%",
             top: meteor.y + "%",
-            animationDelay: meteor.delay,
-            animationDuration: meteor.animationDuration + "s",
+            opacity: 0.7,
+            transform: "rotate(215deg)",
+            animation: `meteor ${meteor.animationDuration}s linear ${meteor.delay}s infinite`,
+            boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.3)",
           }}
         />
       ))}

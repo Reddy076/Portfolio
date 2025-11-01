@@ -34,16 +34,20 @@ export default function ThemeToggle() {
   };
   
   return (
-    <button onClick={toggleTheme} 
-    className={cn("fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colours duration-300",
-      "focus:outline-hidden"
-    )}>
-      {" "}
+    <button 
+      onClick={toggleTheme} 
+      className={cn(
+        "fixed max-sm:hidden top-5 right-5 z-50 p-3 rounded-full transition-all duration-300",
+        "focus:outline-hidden glass hover:scale-110",
+        isDarkMode ? "bg-indigo-900/30" : "bg-amber-100/30"
+      )}
+      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+    >
       {isDarkMode ? (
         <Sun className="h-6 w-6 text-yellow-300" />
-        ) : (
-        <Moon className="h-6 w-6 text-blue-900"/>
-        )}
+      ) : (
+        <Moon className="h-6 w-6 text-indigo-900"/>
+      )}
     </button>
   )
 }
