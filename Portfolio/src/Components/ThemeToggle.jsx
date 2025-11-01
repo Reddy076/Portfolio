@@ -6,34 +6,33 @@ import { cn } from "@/lib/utils";
 
 export default function ThemeToggle() {
 
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-
-  const [isDarkMode, setIsDarkMode]=useState(false);
-
-  useEffect(()=>{
+  useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    if(savedTheme === "dark"){
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
       setIsDarkMode(true);
       document.documentElement.classList.add("dark");
-    }else{
+    } else if (savedTheme === "light" || !savedTheme) {
       setIsDarkMode(false);
-      localStorage.setItem("theme", "light");
-      
+      document.documentElement.classList.remove("dark");
     }
-  },[])
+  }, []);
 
   const toggleTheme = () => {
-    if(isDarkMode){
+    if (isDarkMode) {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
       setIsDarkMode(false);
-    }else{
+    } else {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
       setIsDarkMode(true);
-
     }
   };
+  
   return (
     <button onClick={toggleTheme} 
     className={cn("fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colours duration-300",
