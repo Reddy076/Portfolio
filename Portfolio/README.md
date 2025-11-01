@@ -2,6 +2,10 @@
 
 Welcome to my personal portfolio website! This project showcases my skills, projects, and experience as a developer.
 
+## 🚀 Live Demo
+
+Check out the live deployment of my portfolio: [https://portfolio-rouge-ten-92.vercel.app/](https://portfolio-rouge-ten-92.vercel.app/)
+
 ## 🚀 Features
 
 - Responsive design that works on all devices
