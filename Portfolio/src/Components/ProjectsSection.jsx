@@ -6,7 +6,7 @@ const projects = [
     id: 1,
     title: "Cafiend",
     description: "A full-stack caffeine intake management app using React and Firebase.",
-    image: "/Caffiend.png",
+    image: "Caffiend.png",
     tags: ["React", "Firebase"],
     demoUrl: "https://coffee-tracker-psi.vercel.app/",
     githubUrl: "https://github.com/Reddy076/Coffee-Tracker.git",
@@ -16,7 +16,7 @@ const projects = [
     title: "Netflix",
     description:
       "A streaming service clone with React and CSS.",
-    image: "/Netflix.png",
+    image: "Netflix.png",
     tags: ["HTML/CSS", "React.js"],
     demoUrl: "https://netflix-zvlg.vercel.app/",
     githubUrl: "https://github.com/Reddy076/Netflix.git",
@@ -26,7 +26,7 @@ const projects = [
     title: "Task-Manager-Pro",
     description:
       "A comprehensive task management application with user authentication and data persistence.",
-    image: "/Task_Manager_Pro.png",
+    image: "Task_Manager_Pro.png",
     tags: ["HTML/CSS", "React.js"],
     demoUrl: "https://task-manager-omega-rust.vercel.app/",
     githubUrl: "https://github.com/Reddy076/Task-manager.git",
@@ -39,12 +39,6 @@ export const ProjectsSection = () => {
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
-  // Function to handle image loading errors
-  const handleImageError = (e) => {
-    e.target.style.display = 'none';
-    e.target.nextElementSibling.style.display = 'flex';
-  };
 
   return (
     <section id="projects" className="py-24 px-4 relative overflow-hidden">
@@ -75,18 +69,9 @@ export const ProjectsSection = () => {
                 transition: `all 0.5s ease-out ${index * 0.1}s`
               }}
             >
-              <div className="h-48 overflow-hidden relative">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                  onError={handleImageError}
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center hidden">
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-primary/30 mb-2">{project.title}</div>
-                    <div className="text-sm text-primary/50">Project Preview</div>
-                  </div>
+              <div className="h-48 overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                  <div className="text-4xl font-bold text-primary/30">{project.title}</div>
                 </div>
               </div>
 
@@ -113,7 +98,6 @@ export const ProjectsSection = () => {
                       target="_blank"
                       className="p-2 rounded-lg bg-secondary hover:bg-primary/10 transition-colors duration-300"
                       aria-label="Live Demo"
-                      rel="noopener noreferrer"
                     >
                       <ExternalLink size={18} className="text-foreground" />
                     </a>
@@ -122,7 +106,6 @@ export const ProjectsSection = () => {
                       target="_blank"
                       className="p-2 rounded-lg bg-secondary hover:bg-primary/10 transition-colors duration-300"
                       aria-label="GitHub Repository"
-                      rel="noopener noreferrer"
                     >
                       <Github size={18} className="text-foreground" />
                     </a>
@@ -138,7 +121,6 @@ export const ProjectsSection = () => {
             className="button-neon inline-flex items-center gap-2"
             target="_blank"
             href="https://github.com/Reddy076"
-            rel="noopener noreferrer"
           >
             Check My Github <ArrowRight size={16} />
           </a>

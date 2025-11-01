@@ -6,11 +6,13 @@ const skills = [
   { name: "HTML/CSS", level: 90, category: "frontend" },
   { name: "JavaScript", level: 85, category: "frontend" },
   { name: "React", level: 80, category: "frontend" },
+  { name: "Tailwind CSS", level: 85, category: "frontend" },
   { name: "Vue.js", level: 70, category: "frontend" },
 
   // Tools
   { name: "Git/GitHub", level: 90, category: "tools" },
   { name: "VS Code", level: 95, category: "tools" },
+  { name: "Figma", level: 75, category: "tools" },
   { name: "Webpack", level: 70, category: "tools" },
 ];
 
@@ -22,23 +24,29 @@ const categories = [
 
 export const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [isVisible, setIsVisible] = useState(false);
+  const [animatedSkills, setAnimatedSkills] = useState([]);
 
   const filteredSkills = skills.filter(
     (skill) => activeCategory === "all" || skill.category === activeCategory
   );
 
   useEffect(() => {
-    // Trigger animation when component mounts or category changes
-    setIsVisible(false);
+    // Reset animation when category changes
+    setAnimatedSkills([]);
     const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 50);
+      setAnimatedSkills(filteredSkills.map((_, i) => i));
+    }, 100);
     return () => clearTimeout(timer);
-  }, [activeCategory]);
+  }, [activeCategory, filteredSkills]);
 
   return (
     <section id="skills" className="py-24 px-4 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-accent/5 blur-3xl"></div>
+      </div>
+      
       <div className="container mx-auto max-w-5xl relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
           My <span className="gradient-text">Skills</span>
@@ -65,13 +73,11 @@ export const SkillsSection = () => {
           {filteredSkills.map((skill, index) => (
             <div
               key={`${activeCategory}-${index}`}
-              className="bg-background/30 p-6 rounded-xl border-0 outline-none"
+              className="glass p-6 card-3d"
               style={{ 
-                transition: 'all 0.5s ease-out',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : `translateY(${20 + index * 5}px)`,
-                transitionDelay: `${index * 100}ms`,
-                boxShadow: 'none'
+                animationDelay: `${index * 100}ms`,
+                opacity: animatedSkills.includes(index) ? 1 : 0,
+                transform: animatedSkills.includes(index) ? 'translateY(0)' : 'translateY(20px)'
               }}
             >
               <div className="flex justify-between items-center mb-4">
@@ -82,8 +88,8 @@ export const SkillsSection = () => {
                 <div
                   className="bg-gradient-to-r from-primary to-accent h-3 rounded-full origin-left transition-all duration-1000 ease-out"
                   style={{ 
-                    width: isVisible ? `${skill.level}%` : '0%',
-                    transitionDelay: `${index * 100 + 300}ms`
+                    width: animatedSkills.includes(index) ? `${skill.level}%` : '0%',
+                    transitionDelay: `${index * 100}ms`
                   }}
                 />
               </div>

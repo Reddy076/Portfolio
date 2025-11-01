@@ -131,7 +131,7 @@
   }
 
   * {
-    /* Removed global border application to prevent navbar transparency issues */
+    @apply border-border;
   }
 
   html {
